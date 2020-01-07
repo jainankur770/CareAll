@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 07, 2020 at 05:44 PM
+-- Generation Time: Jan 07, 2020 at 06:34 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.1
 
@@ -53,7 +53,7 @@ INSERT INTO `elder_details` (`Id`, `Name`, `Age`, `Fund_raised`, `Contact`, `Tak
 (8, 'amit', 74, 20000, 8624513975, 0, 0, NULL, NULL),
 (9, 'shreeyash', 53, 14000, 6324512876, 0, 0, NULL, NULL),
 (10, 'mayank', 72, 20000, 9658741354, 2, 0, NULL, NULL),
-(11, 'mohit', 64, 15000, 1245789654, 0, 0, NULL, NULL),
+(11, 'mohit', 64, 15000, 1245789654, 0, 3, NULL, NULL),
 (12, 'akansha', 68, 15000, 8745123654, 0, 0, NULL, NULL);
 
 -- --------------------------------------------------------
@@ -66,8 +66,8 @@ CREATE TABLE `taking_care` (
   `youth_id` int(11) NOT NULL,
   `old_id_1` int(11) DEFAULT NULL,
   `old_id_2` int(11) DEFAULT NULL,
-  `old_id_3` int(11) NOT NULL,
-  `old_id_4` int(11) NOT NULL
+  `old_id_3` int(11) DEFAULT NULL,
+  `old_id_4` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -100,7 +100,9 @@ CREATE TABLE `youth_details` (
 
 INSERT INTO `youth_details` (`Id`, `Name`, `Age`, `Address`, `Contact`, `Number_undertaken_elders`, `Review`, `Rating`) VALUES
 (1, 'Ankur', 27, 'mahesh colony gulabpura', 4512365478, 0, NULL, NULL),
-(2, 'Ashok', 30, 'udaipur', 5741236519, 1, NULL, NULL);
+(2, 'Ashok', 30, 'udaipur', 5741236519, 1, NULL, NULL),
+(3, 'Ayush', 28, 'SS College of engineering', 5621478324, 0, NULL, NULL),
+(4, 'Chirag', 37, 'Bijainagar', 2451369875, 0, NULL, NULL);
 
 --
 -- Indexes for dumped tables
@@ -116,7 +118,7 @@ ALTER TABLE `elder_details`
 -- Indexes for table `taking_care`
 --
 ALTER TABLE `taking_care`
-  ADD PRIMARY KEY (`youth_id`,`old_id_3`),
+  ADD PRIMARY KEY (`youth_id`),
   ADD UNIQUE KEY `old_id_4` (`old_id_4`);
 
 --
@@ -139,7 +141,7 @@ ALTER TABLE `elder_details`
 -- AUTO_INCREMENT for table `youth_details`
 --
 ALTER TABLE `youth_details`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

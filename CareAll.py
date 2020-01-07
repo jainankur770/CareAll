@@ -12,7 +12,10 @@ class elder:
         sq='SELECT Id,Name,Address,Contact FROM youth_details Where Id = "'+str(row[0])+'";'
         cursor.execute(sq)
         row1 = list(cursor.fetchone())
-        print(row1)
+        print("Id :",row1[0])
+        print("Name :",row1[1])
+        print("Address :",row1[2])
+        print("Contact :",row1[3])
         i=input("Press C to confirm or Press R to reject = ")
         if i=="C" or i=="c":
             sql1='UPDATE elder_details SET Request_id'+'="'+str(0)+'", Taken_care_by'+'="'+str(row[0])+ '" WHERE Id'+ '="'+ k+'";'
@@ -31,14 +34,22 @@ class elder:
             print("Rejected")
 
     def login(self,n):
-        sql="SELECT * FROM elder_details Where Id = "+n+";" 
+        sql="SELECT Id,Name,Age,Fund_raised,Contact,Taken_care_by,Review,Rating FROM elder_details Where Id = "+n+";" 
         cursor.execute(sql)
         row = list(cursor.fetchone())
-        print(row)
+        print("id :",row[0])
+        print("Name :",row[1])
+        print("Age :",row[2])
+        print("Fund_raised :",row[3])
+        print("Contact :",row[4])
+        print("Taken_Care_By :",row[5])
+        print("Review :",row[6])
+        print("Rating :",row[7])
+
         i=input("1. To Confirm pending request \n 2. To give review \n")
-        if i==1 :
+        if i=="1" :
             ed.confirm_request(n)
-        elif i==2 :
+        elif i=="2" :
             j=input("Enter the id of youth")
             rr.elder_review_and_rating(j)
         else:
@@ -52,11 +63,11 @@ class elder:
         sq="SELECT Id FROM elder_details Where Contact"+"="+str(k)+";"
         cursor.execute(sq) 
         i=list(cursor.fetchone())
-        print("Signup successfull, your Login Id is ",i)
+        print("Signup successfull, your Login Id is ",i[0])
 
 class young:
     def send_request(self,k):
-        sql="SELECT * FROM elder_details Where Taken_care_by=0;"
+        sql="SELECT Id,Name,Age,Fund_raised,Contact,Review,Rating FROM elder_details Where Taken_care_by=0;"
         cursor.execute(sql)
         row = list(cursor.fetchall())
         print("Following is the list of registered Elders")
@@ -66,6 +77,7 @@ class young:
         sq='UPDATE elder_details SET Request_id'+'="'+k+ '" WHERE Id'+ '="'+ j+'";'
         cursor.execute(sq)
         db.commit()
+        print("Response send successfully")
 
 
 
@@ -74,11 +86,18 @@ class young:
         sql="SELECT * FROM youth_details Where Id = "+n+";" 
         cursor.execute(sql)
         row = list(cursor.fetchone())
-        print(row)
+        print("id :",row[0])
+        print("Name :",row[1])
+        print("Age :",row[2])
+        print("Address :",row[3])
+        print("Contact :",row[4])
+        print("Number of undertaken elders :",row[5])
+        print("Review :",row[6])
+        print("Rating :",row[7])
         i=input("1. To send request to elders \n 2. To give review \n")
-        if i==1 :
+        if i=="1" :
             yg.send_request(n)
-        elif i==2 :
+        elif i=="2" :
             j=input("Enter the id of elder")
             rr.young_review_and_rating(j)
         else:
@@ -93,7 +112,7 @@ class young:
         sq="SELECT Id FROM youth_details Where Contact"+"="+str(k)+";"
         cursor.execute(sq) 
         i=list(cursor.fetchone())
-        print("Signup successfull, your Login Id is ",i)
+        print("Signup successfull, your Login Id is ",i[0])
     
 class review_and_rating:
 
@@ -109,7 +128,7 @@ class review_and_rating:
 ed=elder()
 yg=young()
 rr=review_and_rating()
-a=input("Please enter weather you are elder or young= ")
+a=input("Please enter weather you are elder or young = ")
 if a=="Elder" or a=="elder" or a=="ELDER":
     b=input("Login or Signup = ")
     if b=="login" or b=="Login" or b=="LOGIN":
